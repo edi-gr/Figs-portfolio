@@ -74,7 +74,7 @@ export default function Home() {
           <p className="text-lg text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
             India's Gen Z is ambitious but often faces an "Aspiration-Action
             Gap," struggling with impulsive spending and a lack of financial
-            clarity. Growvest is a mobile app designed to bridge this gap.
+            clarity. GrowVest is a mobile app designed to bridge this gap.
           </p>
           <p className="text-lg text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
             We empower young adults by providing:
@@ -148,7 +148,7 @@ export default function Home() {
                   </svg>
                 </div>
                 <span className="text-gray-700 text-left">
-                  Trust through Proactive Guidance
+                  Proactive Financial Guidance
                 </span>
               </div>
             </div>
@@ -164,9 +164,9 @@ export default function Home() {
               Join Our Community & Build With Us! 🤝
             </h2>
             <p className="text-lg text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
-              We believe in building Growvest in public. Share your ideas, get
-              sneak peeks, and help us shape the future of personal finance for
-              Gen Z!
+              We believe in building GrowVest in public. Contribute to the
+              development by answering fun polls! Share your ideas, get sneak
+              peeks, and help us shape the future of personal finance for Gen Z!
             </p>
             <a
               href="https://chat.whatsapp.com/BSvNztVhvGiGy5lE1Wyx7l"
@@ -199,8 +199,8 @@ export default function Home() {
             </h2>
             <p className="text-lg text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
               We're passionate about demystifying finance. Check out Deven's
-              videos where he shares insights and tips to help you build
-              financial confidence.
+              videos where he breaks down complex personal finance topics
+              through engaging stories.
             </p>
 
             {/* Embedded YouTube Playlist */}
@@ -229,8 +229,8 @@ export default function Home() {
             </h2>
             <p className="text-lg text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
               Get a glimpse of what's coming! Our mobile app will put the power
-              of smart investing right in your pocket, with intuitive design and
-              powerful features.
+              of smart investing right in your pocket, with an intuitive design
+              and powerful features.
             </p>
 
             {/* App Preview Placeholder */}
@@ -295,7 +295,9 @@ export default function Home() {
               Terms of Service
             </a>
             <a
-              href="#"
+              href="https://wa.me/918368644965"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-gray-300 hover:text-white transition-colors"
             >
               Contact Us

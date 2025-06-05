@@ -14,7 +14,12 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "GrowVest - Empowering Your Financial Future",
-  description: "Join GrowVest to revolutionize your personal finance through smart investing. Access AI-powered recommendations, educational content, and join our investing community.",
+  description:
+    "Join GrowVest to revolutionize your personal finance through smart investing. Access AI-powered recommendations, educational content, and join our investing community.",
+  icons: {
+    icon: "/logo.jpg",
+    shortcut: "/logo.jpg",
+  },
 };
 
 export default function RootLayout({
