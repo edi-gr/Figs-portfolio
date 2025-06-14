@@ -16,11 +16,11 @@ export const metadata: Metadata = {
   title: "GrowVest - Empowering Your Financial Future",
   description:
     "Join GrowVest to revolutionize your personal finance through smart investing. Access AI-powered recommendations, educational content, and join our investing community.",
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/favicon.ico",
-  },
+  // icons: {
+  //   icon: "/favicon.ico",
+  //   shortcut: "/favicon.ico",
+  //   apple: "/favicon.ico",
+  // },
 };
 
 export default function RootLayout({
