@@ -17,8 +17,9 @@ export const metadata: Metadata = {
   description:
     "Join GrowVest to revolutionize your personal finance through smart investing. Access AI-powered recommendations, educational content, and join our investing community.",
   icons: {
-    icon: "/logo.jpg",
-    shortcut: "/logo.jpg",
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
   },
 };
 
