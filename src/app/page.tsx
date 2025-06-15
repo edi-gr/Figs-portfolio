@@ -58,7 +58,7 @@ export default function Home() {
         style={{ background: "linear-gradient(to right, #6A0DAD, #8E44AD)" }}
       >
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">GrowVest</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">Plum</h1>
           <p className="text-lg md:text-xl opacity-90">
             Empowering Your Financial Future Through Smart Investing
           </p>
@@ -74,7 +74,7 @@ export default function Home() {
           <p className="text-lg text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
             India's Gen Z is ambitious but often faces an "Aspiration-Action
             Gap," struggling with impulsive spending and a lack of financial
-            clarity. GrowVest is a mobile app designed to bridge this gap.
+            clarity. Plum is a mobile app designed to bridge this gap.
           </p>
           <p className="text-lg text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
             We empower young adults by providing:
@@ -164,7 +164,7 @@ export default function Home() {
               Join Our Community & Build With Us! 🤝
             </h2>
             <p className="text-lg text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
-              We believe in building GrowVest in public. Contribute to the
+              We believe in building Plum in public. Contribute to the
               development by answering fun polls! Share your ideas, get sneak
               peeks, and help us shape the future of personal finance for Gen Z!
             </p>
@@ -209,7 +209,7 @@ export default function Home() {
                 width="100%"
                 height="450"
                 src="https://www.youtube.com/embed/videoseries?list=PLAOCfucQR0MR5LZ6_31CYV7oM2Nad5NgZ"
-                title="GrowVest Playlist"
+                title="Plum Playlist"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
@@ -225,7 +225,7 @@ export default function Home() {
         <div className="max-w-4xl mx-auto">
           <div className="bg-white rounded-2xl p-8 shadow-lg text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-8">
-              Sneak Peek: The GrowVest App ✨
+              Sneak Peek: The Plum App ✨
             </h2>
             <p className="text-lg text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
               Get a glimpse of what's coming! Our mobile app will put the power
@@ -264,7 +264,7 @@ export default function Home() {
                     className="text-xl font-bold mb-2"
                     style={{ color: "#6A0DAD" }}
                   >
-                    GrowVest App
+                    Plum App
                   </h3>
                   <p style={{ color: "#6A0DAD" }}>Click to Preview!</p>
                 </div>
@@ -277,7 +277,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="bg-gray-800 text-white py-12 px-4">
         <div className="max-w-4xl mx-auto text-center">
-          <h3 className="text-2xl font-bold mb-4">GrowVest</h3>
+          <h3 className="text-2xl font-bold mb-4">Plum</h3>
           <p className="text-gray-300 mb-6">
             Empowering Your Financial Future Through Smart Investing
           </p>
@@ -305,7 +305,7 @@ export default function Home() {
           </div>
           <div className="mt-8 pt-8 border-t border-gray-700">
             <p className="text-gray-400 text-sm">
-              © 2025 GrowVest. All rights reserved.
+              © 2025 Plum. All rights reserved.
             </p>
           </div>
         </div>

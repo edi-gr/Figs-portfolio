@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "GrowVest - Empowering Your Financial Future",
+  title: "Plum - Empowering Your Financial Future",
   description:
-    "Join GrowVest to revolutionize your personal finance through smart investing. Access AI-powered recommendations, educational content, and join our investing community.",
+    "Join Plum to revolutionize your personal finance through smart investing. Access AI-powered recommendations, educational content, and join our investing community.",
 };
 
 export default function RootLayout({
