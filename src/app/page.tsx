@@ -398,29 +398,15 @@ export default function Home() {
 
             {/* Custom Form that submits to Google Forms */}
             <form
-              onSubmit={(e) => {
-                e.preventDefault();
-
-                // Get form data
-                const formData = new FormData(e.target as HTMLFormElement);
-                const name = formData.get("entry.326049074") as string;
-                const email = formData.get("entry.1719872335") as string;
-                const platform = formData.get("entry.572226123") as string;
-
-                // Construct the Google Forms URL with pre-filled data
-                const googleFormUrl = `https://docs.google.com/forms/d/e/1FAIpQLSfL4uoviXtT3iZueeeOwAKoUJVb8SLpFf5d_dpPR-sAY_zfJQ/viewform?usp=pp_url&entry.326049074=${encodeURIComponent(
-                  name
-                )}&entry.1719872335=${encodeURIComponent(
-                  email
-                )}&entry.572226123=${encodeURIComponent(platform)}`;
-
-                // Open Google Forms in new tab
-                window.open(googleFormUrl, "_blank");
-
-                // Show success message
-                alert(
-                  "Redirecting you to Google Forms to complete your submission! 🎉"
-                );
+              action="https://docs.google.com/forms/d/e/1FAIpQLSfL4uoviXtT3iZueeeOwAKoUJVb8SLpFf5d_dpPR-sAY_zfJQ/formResponse"
+              method="POST"
+              target="hidden_iframe"
+              onSubmit={() => {
+                setTimeout(() => {
+                  alert(
+                    "Thank you! Your response has been submitted successfully. 🎉 \n We'll send you the app link once the countdown reaches 0 on your mail"
+                  );
+                }, 1000);
               }}
               className="space-y-6"
             >
@@ -529,6 +515,16 @@ export default function Home() {
                 </button>
               </div>
             </form>
+
+            {/* Hidden iframe for Google Forms submission */}
+            <iframe
+              name="hidden_iframe"
+              id="hidden_iframe"
+              style={{ display: "none" }}
+              onLoad={() => {
+                console.log("Form submitted successfully!");
+              }}
+            ></iframe>
 
             <div className="text-center mt-6">
               <p className="text-sm text-gray-500">
