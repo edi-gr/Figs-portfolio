@@ -745,6 +745,171 @@ export default function Home() {
         </div>
       </section>
 
+      {/* About Us Section */}
+      <section className="py-16 px-4 bg-gradient-to-br from-purple-50 to-indigo-50">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12 animate-fadeInUp">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+              Meet Our Team 👨‍💼👩‍💼
+            </h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              We're a passionate team of finance enthusiasts and tech
+              innovators, dedicated to empowering Gen Z with smart financial
+              solutions.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+            {/* Deven */}
+            <div className="bg-white rounded-2xl p-6 shadow-lg text-center section-card animate-fadeInUp hover:shadow-xl transition-all duration-300">
+              <div className="mb-6">
+                <div className="w-28 h-28 sm:w-32 sm:h-32 mx-auto rounded-full overflow-hidden shadow-lg">
+                  <Image
+                    src="/deven.jpg"
+                    alt="Deven"
+                    width={128}
+                    height={128}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+              <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-2">
+                Deven
+              </h3>
+              <p className="text-purple-600 font-semibold mb-4 text-sm sm:text-base">
+                Co-founder & CEO
+              </p>
+              <div className="flex justify-center mt-4">
+                <a
+                  href="https://www.linkedin.com/in/deven-jain/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-purple-600 transition-colors"
+                >
+                  <svg
+                    className="w-5 h-5"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M20.47 2H3.53a1.45 1.45 0 00-1.47 1.43v17.14A1.45 1.45 0 003.53 22h16.94a1.45 1.45 0 001.47-1.43V3.43A1.45 1.45 0 0020.47 2zM8.09 18.74h-3v-9h3v9zM6.59 8.48a1.56 1.56 0 111.56-1.56 1.57 1.57 0 01-1.56 1.56zm11.15 10.26h-3v-4.83c0-1.21-.43-2-1.52-2A1.65 1.65 0 0011.85 13a2 2 0 00-.1.73v5h-3s.04-8.18 0-9h3v1.28a3 3 0 012.71-1.5c2 0 3.44 1.29 3.44 4.08v5.18z" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+
+            {/* Edson */}
+            <div
+              className="bg-white rounded-2xl p-6 shadow-lg text-center section-card animate-fadeInUp hover:shadow-xl transition-all duration-300"
+              style={{ animationDelay: "0.1s" }}
+            >
+              <div className="mb-6">
+                <div className="w-28 h-28 sm:w-32 sm:h-32 mx-auto rounded-full overflow-hidden shadow-lg">
+                  <Image
+                    src="/edson.jpg"
+                    alt="Edson"
+                    width={128}
+                    height={128}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+              <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-2">
+                Edson
+              </h3>
+              <p className="text-purple-600 font-semibold mb-4 text-sm sm:text-base">
+                Co-founder & COO
+              </p>
+              <div className="flex justify-center mt-4">
+                <a
+                  href="https://www.linkedin.com/in/edson-rebello/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-purple-600 transition-colors"
+                >
+                  <svg
+                    className="w-5 h-5"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M20.47 2H3.53a1.45 1.45 0 00-1.47 1.43v17.14A1.45 1.45 0 003.53 22h16.94a1.45 1.45 0 001.47-1.43V3.43A1.45 1.45 0 0020.47 2zM8.09 18.74h-3v-9h3v9zM6.59 8.48a1.56 1.56 0 111.56-1.56 1.57 1.57 0 01-1.56 1.56zm11.15 10.26h-3v-4.83c0-1.21-.43-2-1.52-2A1.65 1.65 0 0011.85 13a2 2 0 00-.1.73v5h-3s.04-8.18 0-9h3v1.28a3 3 0 012.71-1.5c2 0 3.44 1.29 3.44 4.08v5.18z" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+
+            {/* Shadab */}
+            <div
+              className="bg-white rounded-2xl p-6 shadow-lg text-center section-card animate-fadeInUp hover:shadow-xl transition-all duration-300"
+              style={{ animationDelay: "0.2s" }}
+            >
+              <div className="mb-6">
+                <div className="w-28 h-28 sm:w-32 sm:h-32 mx-auto rounded-full overflow-hidden shadow-lg">
+                  <Image
+                    src="/shadab.jpg"
+                    alt="Shadab"
+                    width={128}
+                    height={128}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+              <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-2">
+                Shadab
+              </h3>
+              <p className="text-purple-600 font-semibold mb-4 text-sm sm:text-base">
+                Co-founder & CTO
+              </p>
+              <div className="flex justify-center mt-4">
+                <a
+                  href="https://in.linkedin.com/in/shadabkalim"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-purple-600 transition-colors"
+                >
+                  <svg
+                    className="w-5 h-5"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M20.47 2H3.53a1.45 1.45 0 00-1.47 1.43v17.14A1.45 1.45 0 003.53 22h16.94a1.45 1.45 0 001.47-1.43V3.43A1.45 1.45 0 0020.47 2zM8.09 18.74h-3v-9h3v9zM6.59 8.48a1.56 1.56 0 111.56-1.56 1.57 1.57 0 01-1.56 1.56zm11.15 10.26h-3v-4.83c0-1.21-.43-2-1.52-2A1.65 1.65 0 0011.85 13a2 2 0 00-.1.73v5h-3s.04-8.18 0-9h3v1.28a3 3 0 012.71-1.5c2 0 3.44 1.29 3.44 4.08v5.18z" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+
+            {/* Harsh Madhav */}
+            <div
+              className="bg-white rounded-2xl p-6 shadow-lg text-center section-card animate-fadeInUp hover:shadow-xl transition-all duration-300"
+              style={{ animationDelay: "0.3s" }}
+            >
+              <div className="mb-6">
+                <div className="w-28 h-28 sm:w-32 sm:h-32 mx-auto rounded-full overflow-hidden shadow-lg bg-gradient-to-br from-purple-100 to-purple-200 flex items-center justify-center">
+                  <svg
+                    className="w-14 h-14 sm:w-16 sm:h-16 text-purple-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-2">
+                Harsh Madhav
+              </h3>
+              <p className="text-purple-600 font-semibold mb-4 text-sm sm:text-base">
+                Product Lead
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="bg-gray-800 text-white py-12 px-4 animate-fadeInUp">
         <div className="max-w-4xl mx-auto text-center">
