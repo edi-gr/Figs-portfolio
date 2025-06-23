@@ -1,0 +1,20 @@
+<! DOCTYPE html>
+<htal>
+chead
+<neta charset="utf-8">
+<neta name "viewport" content="width=device-width, initial-scale=1">
+<title>Demo Form</title>
+</head>
+<body
+<form action="https://docs.google.com/forms/d/e/
+1FAIpQLSccIXKuV1qaGl0v3vK7xlPZW5LKTHY01CzL2VRG-8X3mgKzjg/formResponse">
+<label for="entry.1616793585">What is your favorite color ?< /label><br>
+<input type="text" name="entry. 1616793585" placeholder="Black"><br>
+<label for="entry.523487699">What is your favorite animal ?< /label><br>
+<input type="text" name="entry.523487699" placeholder="Cat"><br>
+<label for="entry.1376537815">What is your favorite food ?< /label><br>
+<input type="text" name="entry. 1376537815" placeholder="Cheese"><br>
+<button type="submit">Submit Form</button>
+</form>
+</body>
+</htnl>

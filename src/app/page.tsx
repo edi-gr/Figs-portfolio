@@ -12,6 +12,46 @@ export default function Home() {
   const [showYoutube, setShowYoutube] = useState(true);
   const [showSneakPeek, setShowSneakPeek] = useState(true);
 
+  // Countdown timer state
+  const [timeLeft, setTimeLeft] = useState({
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
+
+  useEffect(() => {
+    const calculateTimeLeft = () => {
+      const now = new Date();
+      const today = new Date();
+      today.setHours(23, 59, 0, 0); // Set to 11:59 PM today
+
+      // If current time is past 11:59 PM, set target to 11:59 PM tomorrow
+      if (now > today) {
+        today.setDate(today.getDate() + 1);
+      }
+
+      const difference = today.getTime() - now.getTime();
+
+      if (difference > 0) {
+        return {
+          hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+          minutes: Math.floor((difference / 1000 / 60) % 60),
+          seconds: Math.floor((difference / 1000) % 60),
+        };
+      }
+
+      return { hours: 0, minutes: 0, seconds: 0 };
+    };
+
+    const timer = setInterval(() => {
+      setTimeLeft(calculateTimeLeft());
+    }, 1000);
+
+    setTimeLeft(calculateTimeLeft());
+
+    return () => clearInterval(timer);
+  }, []);
+
   useEffect(() => {
     const options = {
       root: null,
@@ -96,6 +136,18 @@ export default function Home() {
           }
         }
 
+        @keyframes countdown {
+          0% {
+            transform: scale(1);
+          }
+          50% {
+            transform: scale(1.05);
+          }
+          100% {
+            transform: scale(1);
+          }
+        }
+
         .animate-fadeInUp {
           animation: fadeInUp 0.8s ease-out forwards;
         }
@@ -114,6 +166,10 @@ export default function Home() {
 
         .animate-pulse-gentle {
           animation: pulse 2s ease-in-out infinite;
+        }
+
+        .animate-countdown {
+          animation: countdown 1s ease-in-out infinite;
         }
 
         .custom-purple-button {
@@ -249,6 +305,37 @@ export default function Home() {
         .nav-button:hover .nav-tooltip {
           opacity: 1;
         }
+
+        .countdown-digit {
+          background: linear-gradient(135deg, #6a0dad, #8e44ad);
+          border-radius: 12px;
+          color: white;
+          font-weight: bold;
+          min-width: 60px;
+          height: 60px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.5rem;
+          box-shadow: 0 8px 25px rgba(106, 13, 173, 0.3);
+        }
+
+        .countdown-label {
+          font-size: 0.75rem;
+          color: #6a0dad;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          margin-top: 8px;
+        }
+
+        @media (max-width: 640px) {
+          .countdown-digit {
+            min-width: 50px;
+            height: 50px;
+            font-size: 1.25rem;
+          }
+        }
       `}</style>
 
       {/* Header Section */}
@@ -263,6 +350,195 @@ export default function Home() {
           </p>
         </div>
       </header>
+
+      {/* Countdown and Early Access Form Section */}
+      <section className="py-16 px-4 bg-gradient-to-br from-purple-50 to-indigo-50">
+        <div className="max-w-4xl mx-auto">
+          {/* Countdown Timer */}
+          <div className="text-center mb-12 animate-fadeInUp">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-8">
+              🚀 Launching App In
+            </h2>
+            <div className="flex justify-center items-center space-x-4 md:space-x-6 mb-4">
+              <div className="text-center">
+                <div className="countdown-digit animate-countdown">
+                  {String(timeLeft.hours).padStart(2, "0")}
+                </div>
+                <div className="countdown-label">Hours</div>
+              </div>
+              <div className="text-2xl font-bold text-purple-600">:</div>
+              <div className="text-center">
+                <div className="countdown-digit animate-countdown">
+                  {String(timeLeft.minutes).padStart(2, "0")}
+                </div>
+                <div className="countdown-label">Minutes</div>
+              </div>
+              <div className="text-2xl font-bold text-purple-600">:</div>
+              <div className="text-center">
+                <div className="countdown-digit animate-countdown">
+                  {String(timeLeft.seconds).padStart(2, "0")}
+                </div>
+                <div className="countdown-label">Seconds</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Early Access Form */}
+          <div className="bg-white rounded-2xl p-6 md:p-8 shadow-lg section-card animate-scaleIn">
+            <div className="text-center mb-8">
+              <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">
+                🎯 Get Your Hands on the App
+              </h3>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                Be among the first to experience Figs! Fill out the form below
+                to secure your early access and shape the future of financial
+                wellness.
+              </p>
+            </div>
+
+            {/* Custom Form that submits to Google Forms */}
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+
+                // Get form data
+                const formData = new FormData(e.target as HTMLFormElement);
+                const name = formData.get("entry.326049074") as string;
+                const email = formData.get("entry.1719872335") as string;
+                const platform = formData.get("entry.572226123") as string;
+
+                // Construct the Google Forms URL with pre-filled data
+                const googleFormUrl = `https://docs.google.com/forms/d/e/1FAIpQLSfL4uoviXtT3iZueeeOwAKoUJVb8SLpFf5d_dpPR-sAY_zfJQ/viewform?usp=pp_url&entry.326049074=${encodeURIComponent(
+                  name
+                )}&entry.1719872335=${encodeURIComponent(
+                  email
+                )}&entry.572226123=${encodeURIComponent(platform)}`;
+
+                // Open Google Forms in new tab
+                window.open(googleFormUrl, "_blank");
+
+                // Show success message
+                alert(
+                  "Redirecting you to Google Forms to complete your submission! 🎉"
+                );
+              }}
+              className="space-y-6"
+            >
+              {/* Name Field */}
+              <div>
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-semibold text-gray-700 mb-2"
+                >
+                  Full Name *
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="entry.326049074"
+                  required
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 text-gray-900"
+                  placeholder="Enter your full name"
+                />
+              </div>
+
+              {/* Email Field */}
+              <div>
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-semibold text-gray-700 mb-2"
+                >
+                  Email Address *
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="entry.1719872335"
+                  required
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 text-gray-900"
+                  placeholder="Enter your email address"
+                />
+              </div>
+
+              {/* Platform Choice */}
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-3">
+                  Which platform do you primarily use? *
+                </label>
+                <div className="space-y-3">
+                  <label className="flex items-center p-3 border border-gray-300 rounded-lg hover:bg-purple-50 transition-colors cursor-pointer">
+                    <input
+                      type="radio"
+                      name="entry.572226123"
+                      value="Android"
+                      required
+                      className="w-4 h-4 text-purple-600 border-gray-300 focus:ring-purple-500"
+                    />
+                    <div className="ml-3 flex items-center">
+                      <svg
+                        className="w-6 h-6 text-green-600 mr-2"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993.0001.5511-.4482.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993 0 .5511-.4482.9997-.9993.9997m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1518-.5972.416.416 0 00-.5972.1519l-2.0223 3.503c-1.2441-.4871-2.6226-.7637-4.1429-.7637-1.5203 0-2.8988.2766-4.1429.7637L6.8527 5.4069a.4161.4161 0 00-.5972-.1519.4161.4161 0 00-.1519.5972L8.0509 9.3214C4.7178 11.1696 2.5 14.4602 2.5 18.25h19c0-3.7898-2.2178-7.0804-5.5509-8.9286" />
+                      </svg>
+                      <span className="text-gray-700 font-medium">Android</span>
+                    </div>
+                  </label>
+                  <label className="flex items-center p-3 border border-gray-300 rounded-lg hover:bg-purple-50 transition-colors cursor-pointer">
+                    <input
+                      type="radio"
+                      name="entry.572226123"
+                      value="iOS"
+                      className="w-4 h-4 text-purple-600 border-gray-300 focus:ring-purple-500"
+                    />
+                    <div className="ml-3 flex items-center">
+                      <svg
+                        className="w-6 h-6 text-gray-800 mr-2"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                      </svg>
+                      <span className="text-gray-700 font-medium">iOS</span>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              {/* Submit Button */}
+              <div className="text-center space-y-4">
+                <button
+                  type="submit"
+                  className="custom-purple-button inline-flex items-center justify-center text-white font-semibold py-4 px-8 rounded-full shadow-lg w-full sm:w-auto"
+                >
+                  <svg
+                    className="w-5 h-5 mr-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+                    />
+                  </svg>
+                  Secure My Early Access
+                </button>
+              </div>
+            </form>
+
+            <div className="text-center mt-6">
+              <p className="text-sm text-gray-500">
+                🔒 Your information is secure and will only be used to provide
+                you with early access to Figs.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* What We're Building Section */}
       <section className="py-16 px-4">
