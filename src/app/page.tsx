@@ -253,40 +253,38 @@ export default function Home() {
 
       {/* Header Section */}
       <header
-        className="text-white py-18 md:py-20 px-5 md:px-6 rounded-b-3xl animate-fadeInDown"
+        className="text-white py-16 px-4 rounded-b-3xl animate-fadeInDown"
         style={{ background: "linear-gradient(135deg, #6A0DAD, #8E44AD)" }}
       >
-        <div className="max-w-4xl lg:max-w-5xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-5 md:mb-6">
-            Figs
-          </h1>
-          <p className="text-lg md:text-xl lg:text-2xl opacity-90 animate-fadeInUp">
+        <div className="max-w-4xl mx-auto text-center">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 ">Figs</h1>
+          <p className="text-lg md:text-xl opacity-90 animate-fadeInUp">
             Empowering Your Financial Future Through Smart Investing
           </p>
         </div>
       </header>
 
       {/* What We're Building Section */}
-      <section className="py-18 md:py-20 px-5 md:px-6">
-        <div className="max-w-4xl lg:max-w-5xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-9 md:mb-10 animate-fadeInUp">
+      <section className="py-16 px-4">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-8 animate-fadeInUp">
             What We're Building 🚀
           </h2>
-          <p className="text-lg md:text-xl lg:text-2xl text-gray-600 mb-13 md:mb-14 max-w-3xl lg:max-w-4xl mx-auto leading-relaxed animate-fadeInUp">
+          <p className="text-lg text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed animate-fadeInUp">
             India's Gen Z is ambitious but often faces an "Aspiration-Action
             Gap," struggling with impulsive spending and a lack of financial
             clarity. Figs is a mobile app designed to bridge this gap.
           </p>
-          <p className="text-lg md:text-xl lg:text-2xl text-gray-600 mb-13 md:mb-14 max-w-3xl lg:max-w-4xl mx-auto leading-relaxed animate-fadeInUp">
+          <p className="text-lg text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed animate-fadeInUp">
             We empower young adults by providing:
           </p>
 
-          <div className="grid gap-5 md:gap-6 max-w-lg lg:max-w-xl mx-auto">
-            <div className="bg-white rounded-xl p-7 md:p-8 shadow-lg feature-card hover:shadow-xl">
-              <div className="flex items-center space-x-5 md:space-x-6">
+          <div className="grid gap-4 max-w-lg mx-auto">
+            <div className="bg-white rounded-xl p-6 shadow-lg feature-card hover:shadow-xl">
+              <div className="flex items-center space-x-4">
                 <div className="flex-shrink-0">
                   <svg
-                    className="w-7 h-7 md:w-8 md:h-8 animate-pulse-gentle"
+                    className="w-6 h-6 animate-pulse-gentle"
                     style={{ color: "#6A0DAD" }}
                     fill="none"
                     stroke="currentColor"
@@ -300,17 +298,17 @@ export default function Home() {
                     />
                   </svg>
                 </div>
-                <span className="text-gray-700 text-left text-lg md:text-xl">
+                <span className="text-gray-700 text-left">
                   Effortless Spending Clarity
                 </span>
               </div>
             </div>
 
-            <div className="bg-white rounded-xl p-7 md:p-8 shadow-lg feature-card hover:shadow-xl">
-              <div className="flex items-center space-x-5 md:space-x-6">
+            <div className="bg-white rounded-xl p-6 shadow-lg feature-card hover:shadow-xl">
+              <div className="flex items-center space-x-4">
                 <div className="flex-shrink-0">
                   <svg
-                    className="w-7 h-7 md:w-8 md:h-8 animate-pulse-gentle"
+                    className="w-6 h-6 animate-pulse-gentle"
                     style={{ color: "#6A0DAD" }}
                     fill="none"
                     stroke="currentColor"
@@ -324,17 +322,17 @@ export default function Home() {
                     />
                   </svg>
                 </div>
-                <span className="text-gray-700 text-left text-lg md:text-xl">
+                <span className="text-gray-700 text-left">
                   Personalised Goal Journeys
                 </span>
               </div>
             </div>
 
-            <div className="bg-white rounded-xl p-7 md:p-8 shadow-lg feature-card hover:shadow-xl">
-              <div className="flex items-center space-x-5 md:space-x-6">
+            <div className="bg-white rounded-xl p-6 shadow-lg feature-card hover:shadow-xl">
+              <div className="flex items-center space-x-4">
                 <div className="flex-shrink-0">
                   <svg
-                    className="w-7 h-7 md:w-8 md:h-8 animate-pulse-gentle"
+                    className="w-6 h-6 animate-pulse-gentle"
                     style={{ color: "#6A0DAD" }}
                     fill="none"
                     stroke="currentColor"
@@ -348,7 +346,7 @@ export default function Home() {
                     />
                   </svg>
                 </div>
-                <span className="text-gray-700 text-left text-lg md:text-xl">
+                <span className="text-gray-700 text-left">
                   Proactive Financial Guidance
                 </span>
               </div>
@@ -358,17 +356,13 @@ export default function Home() {
       </section>
 
       {/* Join Our Community Section */}
-      <section
-        id="whatsapp"
-        ref={whatsappRef}
-        className="py-18 md:py-20 px-5 md:px-6"
-      >
-        <div className="max-w-4xl lg:max-w-5xl mx-auto">
-          <div className="bg-white rounded-2xl p-9 md:p-10 shadow-lg text-center section-card animate-scaleIn">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-9 md:mb-10">
+      <section id="whatsapp" ref={whatsappRef} className="py-16 px-4">
+        <div className="max-w-4xl mx-auto">
+          <div className="bg-white rounded-2xl p-8 shadow-lg text-center section-card animate-scaleIn">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-8">
               Join Our Community & Build With Us! 🤝
             </h2>
-            <p className="text-lg md:text-xl lg:text-2xl text-gray-600 mb-9 md:mb-10 max-w-3xl lg:max-w-4xl mx-auto leading-relaxed">
+            <p className="text-lg text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
               We believe in building Figs in public. Contribute to the
               development by answering fun polls! Share your ideas, get sneak
               peeks, and help us shape the future of personal finance for Gen Z!
@@ -396,24 +390,20 @@ export default function Home() {
       </section>
 
       {/* Learn With Us Section */}
-      <section
-        id="youtube"
-        ref={youtubeRef}
-        className="py-18 md:py-20 px-5 md:px-6"
-      >
-        <div className="max-w-4xl lg:max-w-5xl mx-auto">
-          <div className="bg-white rounded-2xl p-9 md:p-10 shadow-lg text-center section-card animate-scaleIn">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-9 md:mb-10">
+      <section id="youtube" ref={youtubeRef} className="py-16 px-4">
+        <div className="max-w-4xl mx-auto">
+          <div className="bg-white rounded-2xl p-8 shadow-lg text-center section-card animate-scaleIn">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-8">
               Learn With Us 📚
             </h2>
-            <p className="text-lg md:text-xl lg:text-2xl text-gray-600 mb-9 md:mb-10 max-w-3xl lg:max-w-4xl mx-auto leading-relaxed">
+            <p className="text-lg text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
               We're passionate about demystifying finance. Check out Deven's
               videos where he breaks down complex personal finance topics
               through engaging stories.
             </p>
 
             {/* Embedded YouTube Playlist */}
-            <div className="max-w-3xl lg:max-w-4xl mx-auto mb-9 md:mb-10">
+            <div className="max-w-3xl mx-auto mb-8">
               <iframe
                 width="100%"
                 height="450"
@@ -430,17 +420,13 @@ export default function Home() {
       </section>
 
       {/* Sneak Peek Section */}
-      <section
-        id="sneakpeek"
-        ref={sneakPeekRef}
-        className="py-18 md:py-20 px-5 md:px-6"
-      >
-        <div className="max-w-4xl lg:max-w-5xl mx-auto">
-          <div className="bg-white rounded-2xl p-9 md:p-10 shadow-lg text-center section-card animate-scaleIn">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-9 md:mb-10">
+      <section id="sneakpeek" ref={sneakPeekRef} className="py-16 px-4">
+        <div className="max-w-4xl mx-auto">
+          <div className="bg-white rounded-2xl p-8 shadow-lg text-center section-card animate-scaleIn">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-8">
               Sneak Peek: The Figs App ✨
             </h2>
-            <p className="text-lg md:text-xl lg:text-2xl text-gray-600 mb-13 md:mb-14 max-w-3xl lg:max-w-4xl mx-auto leading-relaxed">
+            <p className="text-lg text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
               Get a glimpse of what's coming! Our mobile app will put the power
               of smart investing right in your pocket, with an intuitive design
               and powerful features.
@@ -488,13 +474,13 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-800 text-white py-14 md:py-16 px-5 md:px-6 animate-fadeInUp">
-        <div className="max-w-4xl lg:max-w-5xl mx-auto text-center">
-          <h3 className="text-2xl md:text-3xl font-bold mb-5 md:mb-6">Figs</h3>
-          <p className="text-gray-300 text-lg md:text-xl mb-7 md:mb-8">
+      <footer className="bg-gray-800 text-white py-12 px-4 animate-fadeInUp">
+        <div className="max-w-4xl mx-auto text-center">
+          <h3 className="text-2xl font-bold mb-4">Figs</h3>
+          <p className="text-gray-300 mb-6">
             Empowering Your Financial Future Through Smart Investing
           </p>
-          <div className="flex justify-center space-x-7 md:space-x-8 text-base md:text-lg">
+          <div className="flex justify-center space-x-6 text-sm">
             <a
               href="#"
               className="text-gray-300 hover:text-white transition-colors"
@@ -516,8 +502,8 @@ export default function Home() {
               Contact Us
             </a>
           </div>
-          <div className="mt-9 md:mt-10 pt-9 md:pt-10 border-t border-gray-700">
-            <p className="text-gray-400 text-base md:text-lg">
+          <div className="mt-8 pt-8 border-t border-gray-700">
+            <p className="text-gray-400 text-sm">
               © 2025 Figs. All rights reserved.
             </p>
           </div>
