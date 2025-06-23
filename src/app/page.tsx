@@ -777,7 +777,7 @@ export default function Home() {
                 Deven
               </h3>
               <p className="text-purple-600 font-semibold mb-4 text-sm sm:text-base">
-                Co-founder & CEO
+                Co-founder, CEO
               </p>
               <div className="flex justify-center mt-4">
                 <a
