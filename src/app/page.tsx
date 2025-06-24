@@ -2,12 +2,14 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Script from "next/script";
 
 export default function Home() {
   // Section refs and visibility state
   const whatsappRef = useRef<HTMLElement>(null);
   const youtubeRef = useRef<HTMLElement>(null);
   const sneakPeekRef = useRef<HTMLElement>(null);
+  const formRef = useRef<HTMLDivElement>(null);
   const [showWhatsapp, setShowWhatsapp] = useState(true);
   const [showYoutube, setShowYoutube] = useState(true);
   const [showSneakPeek, setShowSneakPeek] = useState(true);
@@ -19,20 +21,23 @@ export default function Home() {
     seconds: 0,
   });
 
-  // Add confetti state
-  const [showConfetti, setShowConfetti] = useState(false);
-
   useEffect(() => {
-    // Always set countdown to 0 and show confetti
+    // Always set countdown to 0
     setTimeLeft({ hours: 0, minutes: 0, seconds: 0 });
-    setShowConfetti(true);
+  }, []);
 
-    // Hide confetti after 5 seconds
-    const confettiTimer = setTimeout(() => {
-      setShowConfetti(false);
-    }, 5000);
+  // Auto-scroll to form section after 3 seconds
+  useEffect(() => {
+    const scrollTimer = setTimeout(() => {
+      if (formRef.current) {
+        formRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    }, 3000);
 
-    return () => clearTimeout(confettiTimer);
+    return () => clearTimeout(scrollTimer);
   }, []);
 
   useEffect(() => {
@@ -65,6 +70,13 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Confetti Script */}
+      <Script
+        src="https://run.confettipage.com/here.js"
+        data-confetticode="U2FsdGVkX18GYT0Pz+uCv/2DjcZv0mFb1qsE1yuDXVpyixNFBRnUh6FsyOH2v1I6+4P8eOZYT0mksaGZI1Kav9Ykz8uP4zkMXlzuLwGFMqMjgEH+I+RNE6H0+rRkQ9mG5cPPxrgfavKkEUlN9G8cEGkehF/3TiEvL/NLfVdVIcg7p+GXOInU1pkTPAP+Fl9sRBjvs4QyS/HReDOuDJ1Go6/sHk/1L9yxY7bOlGge7RVGrBl6knlqKi+vriRo7cvjt/g7yrVOYpUkfXfvS2gLSPxufwuw7jQYCH0DAf6YgkT3+qOXTmtbLoAx7kRaUTDxZKAeYDVuiBPbc5OaIQa3x3jlH8xmzALxPKglOedvd0uIMq0B4T53u0J3TPOghu6RKKqt+0imqIp6Oe0oS/8ove5iJYFSSQoKRFkT4UO3co/9+H5T1UOgeeJWOArTMGpyTC7iTtPXj+uAdrnsWMeXYcfqospubTLC7TBou/0FP4Co2Ra9LbkCP6Y9AeX5FpWcytN+rKlNAHwlctVga3EzwnWDJzSEJEEVlDiz8sHBNCdQ4Cdm39AlT4BWUt3iCgqIpdSzsNPJyVeH3U6lXKxwmewWRtcd/SxVWm/ud96Vn7Nk9DGg4aGsGtdI7efkSTot3yv+gECtg/Ze/dCLGunCknWRW707H+XGuqvtgYIffiqZiT7khD6wMVf3c+DFFD7nlf98KmNdHbTg4obSswuYDB5kVm7h1D7ZCmldidIIfCs="
+        strategy="afterInteractive"
+      />
+
       <style jsx>{`
         @keyframes fadeInUp {
           from {
@@ -320,127 +332,6 @@ export default function Home() {
           }
         }
 
-        /* Confetti Animation Styles */
-        .confetti {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          pointer-events: none;
-          z-index: 9999;
-        }
-
-        .confetti-piece {
-          position: absolute;
-          width: 10px;
-          height: 10px;
-          background: #6a0dad;
-          animation: confetti-fall 3s linear infinite;
-        }
-
-        .confetti-piece:nth-child(1) {
-          left: 10%;
-          animation-delay: 0s;
-          background: #ff6b6b;
-        }
-        .confetti-piece:nth-child(2) {
-          left: 20%;
-          animation-delay: 0.2s;
-          background: #4ecdc4;
-        }
-        .confetti-piece:nth-child(3) {
-          left: 30%;
-          animation-delay: 0.4s;
-          background: #45b7d1;
-        }
-        .confetti-piece:nth-child(4) {
-          left: 40%;
-          animation-delay: 0.6s;
-          background: #96ceb4;
-        }
-        .confetti-piece:nth-child(5) {
-          left: 50%;
-          animation-delay: 0.8s;
-          background: #ffeaa7;
-        }
-        .confetti-piece:nth-child(6) {
-          left: 60%;
-          animation-delay: 1s;
-          background: #dda0dd;
-        }
-        .confetti-piece:nth-child(7) {
-          left: 70%;
-          animation-delay: 1.2s;
-          background: #98d8c8;
-        }
-        .confetti-piece:nth-child(8) {
-          left: 80%;
-          animation-delay: 1.4s;
-          background: #fd79a8;
-        }
-        .confetti-piece:nth-child(9) {
-          left: 90%;
-          animation-delay: 1.6s;
-          background: #fdcb6e;
-        }
-        .confetti-piece:nth-child(10) {
-          left: 15%;
-          animation-delay: 1.8s;
-          background: #6c5ce7;
-        }
-        .confetti-piece:nth-child(11) {
-          left: 25%;
-          animation-delay: 2s;
-          background: #a29bfe;
-        }
-        .confetti-piece:nth-child(12) {
-          left: 35%;
-          animation-delay: 2.2s;
-          background: #fd79a8;
-        }
-        .confetti-piece:nth-child(13) {
-          left: 45%;
-          animation-delay: 2.4s;
-          background: #00b894;
-        }
-        .confetti-piece:nth-child(14) {
-          left: 55%;
-          animation-delay: 2.6s;
-          background: #e17055;
-        }
-        .confetti-piece:nth-child(15) {
-          left: 65%;
-          animation-delay: 2.8s;
-          background: #0984e3;
-        }
-        .confetti-piece:nth-child(16) {
-          left: 75%;
-          animation-delay: 3s;
-          background: #00cec9;
-        }
-        .confetti-piece:nth-child(17) {
-          left: 85%;
-          animation-delay: 3.2s;
-          background: #fd63a4;
-        }
-        .confetti-piece:nth-child(18) {
-          left: 95%;
-          animation-delay: 3.4s;
-          background: #fdcb6e;
-        }
-
-        @keyframes confetti-fall {
-          0% {
-            transform: translateY(-100vh) rotate(0deg);
-            opacity: 1;
-          }
-          100% {
-            transform: translateY(100vh) rotate(720deg);
-            opacity: 0;
-          }
-        }
-
         .celebrate-text {
           background: linear-gradient(
             45deg,
@@ -517,17 +408,11 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Confetti Animation */}
-          {showConfetti && (
-            <div className="confetti">
-              {Array.from({ length: 18 }, (_, i) => (
-                <div key={i} className="confetti-piece"></div>
-              ))}
-            </div>
-          )}
-
           {/* Early Access Form */}
-          <div className="bg-white rounded-2xl p-6 md:p-8 shadow-lg section-card animate-scaleIn">
+          <div
+            ref={formRef}
+            className="bg-white rounded-2xl p-6 md:p-8 shadow-lg section-card animate-scaleIn"
+          >
             <div className="text-center mb-8">
               <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">
                 🎯 Get Your Hands on the App
@@ -902,7 +787,8 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+          {/* Top Row - Co-founders */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-8">
             {/* Deven */}
             <div className="bg-white rounded-2xl p-6 shadow-lg text-center section-card animate-fadeInUp hover:shadow-xl transition-all duration-300">
               <div className="mb-6">
@@ -1019,7 +905,10 @@ export default function Home() {
                 </a>
               </div>
             </div>
+          </div>
 
+          {/* Bottom Row - Team Members */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8 max-w-2xl mx-auto">
             {/* Harsh Madhav */}
             <div
               className="bg-white rounded-2xl p-6 shadow-lg text-center section-card animate-fadeInUp hover:shadow-xl transition-all duration-300"
@@ -1048,6 +937,46 @@ export default function Home() {
               <p className="text-purple-600 font-semibold mb-4 text-sm sm:text-base">
                 Product Lead
               </p>
+            </div>
+
+            {/* Poddutur Pavan Gupta */}
+            <div
+              className="bg-white rounded-2xl p-6 shadow-lg text-center section-card animate-fadeInUp hover:shadow-xl transition-all duration-300"
+              style={{ animationDelay: "0.4s" }}
+            >
+              <div className="mb-6">
+                <div className="w-28 h-28 sm:w-32 sm:h-32 mx-auto rounded-full overflow-hidden shadow-lg">
+                  <Image
+                    src="/poddutur pavan gupta.jpg"
+                    alt="Poddutur Pavan Gupta"
+                    width={128}
+                    height={128}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+              <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-2">
+                Poddutur Pavan Gupta
+              </h3>
+              <p className="text-purple-600 font-semibold mb-4 text-sm sm:text-base">
+                Content Strategist
+              </p>
+              <div className="flex justify-center mt-4">
+                <a
+                  href="https://www.linkedin.com/in/poddutur-pavan-gupta-b7b6102a8?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-purple-600 transition-colors"
+                >
+                  <svg
+                    className="w-5 h-5"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M20.47 2H3.53a1.45 1.45 0 00-1.47 1.43v17.14A1.45 1.45 0 003.53 22h16.94a1.45 1.45 0 001.47-1.43V3.43A1.45 1.45 0 0020.47 2zM8.09 18.74h-3v-9h3v9zM6.59 8.48a1.56 1.56 0 111.56-1.56 1.57 1.57 0 01-1.56 1.56zm11.15 10.26h-3v-4.83c0-1.21-.43-2-1.52-2A1.65 1.65 0 0011.85 13a2 2 0 00-.1.73v5h-3s.04-8.18 0-9h3v1.28a3 3 0 012.71-1.5c2 0 3.44 1.29 3.44 4.08v5.18z" />
+                  </svg>
+                </a>
+              </div>
             </div>
           </div>
         </div>
