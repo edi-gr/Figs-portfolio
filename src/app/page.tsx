@@ -19,37 +19,20 @@ export default function Home() {
     seconds: 0,
   });
 
+  // Add confetti state
+  const [showConfetti, setShowConfetti] = useState(false);
+
   useEffect(() => {
-    const calculateTimeLeft = () => {
-      const now = new Date();
-      const today = new Date();
-      today.setHours(23, 59, 0, 0); // Set to 11:59 PM today
+    // Always set countdown to 0 and show confetti
+    setTimeLeft({ hours: 0, minutes: 0, seconds: 0 });
+    setShowConfetti(true);
 
-      // If current time is past 11:59 PM, set target to 11:59 PM tomorrow
-      if (now > today) {
-        today.setDate(today.getDate() + 1);
-      }
+    // Hide confetti after 5 seconds
+    const confettiTimer = setTimeout(() => {
+      setShowConfetti(false);
+    }, 5000);
 
-      const difference = today.getTime() - now.getTime();
-
-      if (difference > 0) {
-        return {
-          hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-          minutes: Math.floor((difference / 1000 / 60) % 60),
-          seconds: Math.floor((difference / 1000) % 60),
-        };
-      }
-
-      return { hours: 0, minutes: 0, seconds: 0 };
-    };
-
-    const timer = setInterval(() => {
-      setTimeLeft(calculateTimeLeft());
-    }, 1000);
-
-    setTimeLeft(calculateTimeLeft());
-
-    return () => clearInterval(timer);
+    return () => clearTimeout(confettiTimer);
   }, []);
 
   useEffect(() => {
@@ -336,6 +319,154 @@ export default function Home() {
             font-size: 1.25rem;
           }
         }
+
+        /* Confetti Animation Styles */
+        .confetti {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          pointer-events: none;
+          z-index: 9999;
+        }
+
+        .confetti-piece {
+          position: absolute;
+          width: 10px;
+          height: 10px;
+          background: #6a0dad;
+          animation: confetti-fall 3s linear infinite;
+        }
+
+        .confetti-piece:nth-child(1) {
+          left: 10%;
+          animation-delay: 0s;
+          background: #ff6b6b;
+        }
+        .confetti-piece:nth-child(2) {
+          left: 20%;
+          animation-delay: 0.2s;
+          background: #4ecdc4;
+        }
+        .confetti-piece:nth-child(3) {
+          left: 30%;
+          animation-delay: 0.4s;
+          background: #45b7d1;
+        }
+        .confetti-piece:nth-child(4) {
+          left: 40%;
+          animation-delay: 0.6s;
+          background: #96ceb4;
+        }
+        .confetti-piece:nth-child(5) {
+          left: 50%;
+          animation-delay: 0.8s;
+          background: #ffeaa7;
+        }
+        .confetti-piece:nth-child(6) {
+          left: 60%;
+          animation-delay: 1s;
+          background: #dda0dd;
+        }
+        .confetti-piece:nth-child(7) {
+          left: 70%;
+          animation-delay: 1.2s;
+          background: #98d8c8;
+        }
+        .confetti-piece:nth-child(8) {
+          left: 80%;
+          animation-delay: 1.4s;
+          background: #fd79a8;
+        }
+        .confetti-piece:nth-child(9) {
+          left: 90%;
+          animation-delay: 1.6s;
+          background: #fdcb6e;
+        }
+        .confetti-piece:nth-child(10) {
+          left: 15%;
+          animation-delay: 1.8s;
+          background: #6c5ce7;
+        }
+        .confetti-piece:nth-child(11) {
+          left: 25%;
+          animation-delay: 2s;
+          background: #a29bfe;
+        }
+        .confetti-piece:nth-child(12) {
+          left: 35%;
+          animation-delay: 2.2s;
+          background: #fd79a8;
+        }
+        .confetti-piece:nth-child(13) {
+          left: 45%;
+          animation-delay: 2.4s;
+          background: #00b894;
+        }
+        .confetti-piece:nth-child(14) {
+          left: 55%;
+          animation-delay: 2.6s;
+          background: #e17055;
+        }
+        .confetti-piece:nth-child(15) {
+          left: 65%;
+          animation-delay: 2.8s;
+          background: #0984e3;
+        }
+        .confetti-piece:nth-child(16) {
+          left: 75%;
+          animation-delay: 3s;
+          background: #00cec9;
+        }
+        .confetti-piece:nth-child(17) {
+          left: 85%;
+          animation-delay: 3.2s;
+          background: #fd63a4;
+        }
+        .confetti-piece:nth-child(18) {
+          left: 95%;
+          animation-delay: 3.4s;
+          background: #fdcb6e;
+        }
+
+        @keyframes confetti-fall {
+          0% {
+            transform: translateY(-100vh) rotate(0deg);
+            opacity: 1;
+          }
+          100% {
+            transform: translateY(100vh) rotate(720deg);
+            opacity: 0;
+          }
+        }
+
+        .celebrate-text {
+          background: linear-gradient(
+            45deg,
+            #ff6b6b,
+            #4ecdc4,
+            #45b7d1,
+            #96ceb4
+          );
+          background-size: 400% 400%;
+          animation: gradient-celebration 2s ease infinite;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+
+        @keyframes gradient-celebration {
+          0% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+          100% {
+            background-position: 0% 50%;
+          }
+        }
       `}</style>
 
       {/* Header Section */}
@@ -357,7 +488,7 @@ export default function Home() {
           {/* Countdown Timer */}
           <div className="text-center mb-12 animate-fadeInUp">
             <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-8">
-              🚀 Launching App In
+              🎉 <span className="celebrate-text">The App is Live!</span> 🎉
             </h2>
             <div className="flex justify-center items-center space-x-4 md:space-x-6 mb-4">
               <div className="text-center">
@@ -381,7 +512,19 @@ export default function Home() {
                 <div className="countdown-label">Seconds</div>
               </div>
             </div>
+            <p className="text-lg font-semibold text-purple-600 mt-4">
+              🚀 Ready to transform your financial future? Download now! 🚀
+            </p>
           </div>
+
+          {/* Confetti Animation */}
+          {showConfetti && (
+            <div className="confetti">
+              {Array.from({ length: 18 }, (_, i) => (
+                <div key={i} className="confetti-piece"></div>
+              ))}
+            </div>
+          )}
 
           {/* Early Access Form */}
           <div className="bg-white rounded-2xl p-6 md:p-8 shadow-lg section-card animate-scaleIn">
@@ -466,7 +609,7 @@ export default function Home() {
                         viewBox="0 0 24 24"
                         fill="currentColor"
                       >
-                        <path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993.0001.5511-.4482.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993 0 .5511-.4482.9997-.9993.9997m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1518-.5972.416.416 0 00-.5972.1519l-2.0223 3.503c-1.2441-.4871-2.6226-.7637-4.1429-.7637-1.5203 0-2.8988.2766-4.1429.7637L6.8527 5.4069a.4161.4161 0 00-.5972-.1519.4161.4161 0 00-.1519.5972L8.0509 9.3214C4.7178 11.1696 2.5 14.4602 2.5 18.25h19c0-3.7898-2.2178-7.0804-5.5509-8.9286" />
+                        <path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993 0 .5511-.4482.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993 0 .5511-.4482.9997-.9993.9997m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1518-.5972.416.416 0 00-.5972.1519l-2.0223 3.503c-1.2441-.4871-2.6226-.7637-4.1429-.7637-1.5203 0-2.8988.2766-4.1429.7637L6.8527 5.4069a.4161.4161 0 00-.5972-.1519.4161.4161 0 00-.1519.5972L8.0509 9.3214C4.7178 11.1696 2.5 14.4602 2.5 18.25h19c0-3.7898-2.2178-7.0804-5.5509-8.9286" />
                       </svg>
                       <span className="text-gray-700 font-medium">Android</span>
                     </div>
