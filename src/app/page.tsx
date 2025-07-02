@@ -21,6 +21,19 @@ export default function Home() {
     seconds: 0,
   });
 
+  // Form modal state
+  const [showFormModal, setShowFormModal] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+  });
+  const [formErrors, setFormErrors] = useState({
+    name: "",
+    contact: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   useEffect(() => {
     // Always set countdown to 0
     setTimeLeft({ hours: 0, minutes: 0, seconds: 0 });
@@ -67,6 +80,95 @@ export default function Home() {
       observerContact.disconnect();
     };
   }, []);
+
+  // Form validation function
+  const validateForm = () => {
+    const errors = { name: "", contact: "" };
+    let isValid = true;
+
+    if (!formData.name.trim()) {
+      errors.name = "Name is required";
+      isValid = false;
+    }
+
+    if (!formData.email.trim() && !formData.phone.trim()) {
+      errors.contact = "Please provide either email or phone number";
+      isValid = false;
+    }
+
+    setFormErrors(errors);
+    return isValid;
+  };
+
+  // Form submission function
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      // Create the Google Form submission URL
+      const baseUrl =
+        "https://docs.google.com/forms/d/e/1FAIpQLSfL4uoviXtT3iZueeeOwAKoUJVb8SLpFf5d_dpPR-sAY_zfJQ/formResponse";
+
+      const formDataToSend = new URLSearchParams();
+      formDataToSend.append("entry.326049074", formData.name);
+      if (formData.email) {
+        formDataToSend.append("entry.1719872335", formData.email);
+      }
+      if (formData.phone) {
+        formDataToSend.append("entry.572226123", formData.phone);
+      }
+
+      // Submit to Google Forms (using fetch with no-cors mode)
+      await fetch(baseUrl, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: formDataToSend.toString(),
+      });
+
+      // Close modal and redirect to download
+      setShowFormModal(false);
+      setFormData({ name: "", email: "", phone: "" });
+
+      // Redirect to download link
+      window.open(
+        "https://drive.google.com/drive/folders/1jrDKqRwVfDUUYz4KIE__rJlv2VHM1t8p",
+        "_blank"
+      );
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      // Still redirect to download even if form submission fails
+      window.open(
+        "https://drive.google.com/drive/folders/1jrDKqRwVfDUUYz4KIE__rJlv2VHM1t8p",
+        "_blank"
+      );
+      setShowFormModal(false);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  // Handle form input changes
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+
+    // Clear errors when user starts typing
+    if (formErrors.name && name === "name") {
+      setFormErrors((prev) => ({ ...prev, name: "" }));
+    }
+    if (formErrors.contact && (name === "email" || name === "phone")) {
+      setFormErrors((prev) => ({ ...prev, contact: "" }));
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -358,6 +460,25 @@ export default function Home() {
             background-position: 0% 50%;
           }
         }
+
+        .modal-enter {
+          animation: modalEnter 0.3s ease-out forwards;
+        }
+
+        @keyframes modalEnter {
+          from {
+            opacity: 0;
+            transform: scale(0.9) translateY(-10px);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+          }
+        }
+
+        .form-input:focus {
+          box-shadow: 0 0 0 3px rgba(106, 13, 173, 0.1);
+        }
       `}</style>
 
       {/* Header Section */}
@@ -428,21 +549,13 @@ export default function Home() {
               <div className="text-center">
                 <h4 className="text-xl font-bold text-gray-800 mb-4"></h4>
                 <div className="space-y-4">
-                  <a
-                    href="https://drive.google.com/drive/folders/1VgPt83CeL-3-YA1QYfzVIwh_sZetgWsw"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <button
+                    onClick={() => setShowFormModal(true)}
                     className="custom-purple-button inline-flex items-center justify-center text-white font-semibold py-4 px-8 rounded-full shadow-lg w-full sm:w-auto"
                   >
-                    <svg
-                      className="w-6 h-6 mr-3 text-green-400"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                    >
-                      <path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993 0 .5511-.4482.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993 0 .5511-.4482.9997-.9993.9997m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1518-.5972.416.416 0 00-.5972.1519l-2.0223 3.503c-1.2441-.4871-2.6226-.7637-4.1429-.7637-1.5203 0-2.8988.2766-4.1429.7637L6.8527 5.4069a.4161.4161 0 00-.5972-.1519.4161.4161 0 00-.1519.5972L8.0509 9.3214C4.7178 11.1696 2.5 14.4602 2.5 18.25h19c0-3.7898-2.2178-7.0804-5.5509-8.9286" />
-                    </svg>
-                    Download on Android
-                  </a>
+                    <span className="text-2xl mr-3">⬇️</span>
+                    Download on Android/iOS
+                  </button>
                   <p className="text-sm text-gray-600">
                     Get the APK file and start your financial journey today!
                   </p>
@@ -1037,6 +1150,140 @@ export default function Home() {
                 </svg>
               </button>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* Form Modal */}
+      {showFormModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl p-6 md:p-8 max-w-md w-full shadow-2xl modal-enter">
+            <div className="text-center mb-6">
+              <h3 className="text-2xl font-bold text-gray-800 mb-2">
+                ⬇️ Download Figs App
+              </h3>
+              <p className="text-gray-600">
+                Please provide your details to get the download link
+              </p>
+            </div>
+
+            <form onSubmit={handleFormSubmit} className="space-y-4">
+              {/* Name Field */}
+              <div>
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  Full Name <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  className={`form-input w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all text-gray-900 ${
+                    formErrors.name ? "border-red-500" : "border-gray-300"
+                  }`}
+                  placeholder="Enter your full name"
+                />
+                {formErrors.name && (
+                  <p className="text-red-500 text-sm mt-1">{formErrors.name}</p>
+                )}
+              </div>
+
+              {/* Email Field */}
+              <div>
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  className="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all text-gray-900"
+                  placeholder="Enter your email"
+                />
+              </div>
+
+              {/* Phone Field */}
+              <div>
+                <label
+                  htmlFor="phone"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  Phone Number
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                  className="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all text-gray-900"
+                  placeholder="Enter your phone number"
+                />
+              </div>
+
+              {/* Contact Method Error */}
+              {formErrors.contact && (
+                <p className="text-red-500 text-sm">{formErrors.contact}</p>
+              )}
+
+              {/* Buttons */}
+              <div className="flex space-x-3 pt-4">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowFormModal(false);
+                    setFormData({ name: "", email: "", phone: "" });
+                    setFormErrors({ name: "", contact: "" });
+                  }}
+                  className="flex-1 px-4 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 font-medium transition-colors"
+                  disabled={isSubmitting}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="flex-1 px-4 py-3 bg-gradient-to-r from-purple-600 to-purple-700 text-white rounded-lg hover:from-purple-700 hover:to-purple-800 font-medium transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isSubmitting ? (
+                    <div className="flex items-center justify-center">
+                      <svg
+                        className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        ></circle>
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        ></path>
+                      </svg>
+                      Submitting...
+                    </div>
+                  ) : (
+                    "Get Download Link"
+                  )}
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       )}
