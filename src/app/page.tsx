@@ -31,6 +31,8 @@ export default function Home() {
   const [formErrors, setFormErrors] = useState({
     name: "",
     contact: "",
+    email: "",
+    phone: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -83,7 +85,7 @@ export default function Home() {
 
   // Form validation function
   const validateForm = () => {
-    const errors = { name: "", contact: "" };
+    const errors = { name: "", contact: "", email: "", phone: "" };
     let isValid = true;
 
     if (!formData.name.trim()) {
@@ -91,6 +93,25 @@ export default function Home() {
       isValid = false;
     }
 
+    // Email validation
+    if (formData.email.trim()) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(formData.email)) {
+        errors.email = "Please enter a valid email address";
+        isValid = false;
+      }
+    }
+
+    // Phone validation
+    if (formData.phone.trim()) {
+      const phoneRegex = /^\d{10}$/;
+      if (!phoneRegex.test(formData.phone.replace(/\s/g, ""))) {
+        errors.phone = "Please enter a valid 10-digit phone number";
+        isValid = false;
+      }
+    }
+
+    // At least one contact method required
     if (!formData.email.trim() && !formData.phone.trim()) {
       errors.contact = "Please provide either email or phone number";
       isValid = false;
@@ -164,6 +185,12 @@ export default function Home() {
     // Clear errors when user starts typing
     if (formErrors.name && name === "name") {
       setFormErrors((prev) => ({ ...prev, name: "" }));
+    }
+    if (formErrors.email && name === "email") {
+      setFormErrors((prev) => ({ ...prev, email: "" }));
+    }
+    if (formErrors.phone && name === "phone") {
+      setFormErrors((prev) => ({ ...prev, phone: "" }));
     }
     if (formErrors.contact && (name === "email" || name === "phone")) {
       setFormErrors((prev) => ({ ...prev, contact: "" }));
@@ -1206,9 +1233,16 @@ export default function Home() {
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  className="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all text-gray-900"
+                  className={`form-input w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all text-gray-900 ${
+                    formErrors.email ? "border-red-500" : "border-gray-300"
+                  }`}
                   placeholder="Enter your email"
                 />
+                {formErrors.email && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {formErrors.email}
+                  </p>
+                )}
               </div>
 
               {/* Phone Field */}
@@ -1225,9 +1259,22 @@ export default function Home() {
                   name="phone"
                   value={formData.phone}
                   onChange={handleInputChange}
-                  className="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all text-gray-900"
+                  onInput={(e) => {
+                    // Only allow numbers
+                    const target = e.target as HTMLInputElement;
+                    target.value = target.value.replace(/[^0-9]/g, "");
+                  }}
+                  maxLength={10}
+                  className={`form-input w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all text-gray-900 ${
+                    formErrors.phone ? "border-red-500" : "border-gray-300"
+                  }`}
                   placeholder="Enter your phone number"
                 />
+                {formErrors.phone && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {formErrors.phone}
+                  </p>
+                )}
               </div>
 
               {/* Contact Method Error */}
@@ -1242,7 +1289,12 @@ export default function Home() {
                   onClick={() => {
                     setShowFormModal(false);
                     setFormData({ name: "", email: "", phone: "" });
-                    setFormErrors({ name: "", contact: "" });
+                    setFormErrors({
+                      name: "",
+                      contact: "",
+                      email: "",
+                      phone: "",
+                    });
                   }}
                   className="flex-1 px-4 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 font-medium transition-colors"
                   disabled={isSubmitting}
